@@ -1,0 +1,13 @@
+{
+  "scripts": {
+    "start": "reveal-md slides.md -w --css style.css",
+    "build": "reveal-md slides.md -w --css style.css --static build --assets-dir assets",
+    "deploy": "yarn build && gh-pages -d build"
+  },
+  "dependencies": {
+    "reveal-md": "^4.0.0"
+  },
+  "devDependencies": {
+    "gh-pages": "^3.1.0"
+  }
+}
