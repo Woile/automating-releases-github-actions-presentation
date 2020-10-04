@@ -149,6 +149,12 @@ BREAKING CHANGE: `extends` key in config file is now used for extending other co
 
 ---
 
+## Objetivo de la demo
+
+Con cada nuevo cambio, generar un tag y el changelog y publicar los cambios
+
+---
+
 ## Configuracion de commitizen
 
 En un archivo `.cz.toml` o `pyproject.toml`
