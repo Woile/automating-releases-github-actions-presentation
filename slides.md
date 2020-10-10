@@ -11,6 +11,8 @@ Automatizando releases con commitizen y github actions
 
 [![github logo](./assets/github.png)](https://github.com/commitizen-tools/commitizen)
 
+v: 0.1.0
+
 ---
 
 ## About me
@@ -19,7 +21,7 @@ Santiago
 
 origen: Argentina 🇦🇷 <!-- .element: class="fragment" data-fragment-index="0" -->
 
-actual: Amsterdam 🇳🇱 @ KPN <!-- .element: class="fragment" data-fragment-index="0" -->
+actual: Amsterdam 🇳🇱 <!-- .element: class="fragment" data-fragment-index="0" -->
 
 🐍 python, web, js, stuff <!-- .element: class="fragment" data-fragment-index="0" -->
 
@@ -40,8 +42,8 @@ actual: Amsterdam 🇳🇱 @ KPN <!-- .element: class="fragment" data-fragment-i
 
 ## Introduccion
 
-commitizen es una herramienta para recolectar los cambios recientes y generar
-la version correcta de semver automaticamente.
+`commitizen` es una herramienta escrita en python para recolectar los cambios
+recientes y generar la version correcta de semver automaticamente.
 
 ---
 
@@ -63,9 +65,11 @@ la version correcta de semver automaticamente.
 
 ---
 
-## Utiliza SEMVER sin miedo
+## Sin miedo a SEMVER
 
-Una version semver esta cargada de informacion <!-- .element: class="fragment" data-fragment-index="1" -->
+Una versión semver esta cargada de información <!-- .element: class="fragment" data-fragment-index="1" -->
+
+[semver.org](https://semver.org/)
 
 ---
 
@@ -81,7 +85,9 @@ BREAKING CHANGES ⚠️ <!-- .element: class="fragment" data-fragment-index="0" 
 
 ⬇️ <!-- .element: class="fragment" data-fragment-index="0" -->
 
-New stuff 🎉 <!-- .element: class="fragment" data-fragment-index="0" -->
+Cosas nuevas 🎉 <!-- .element: class="fragment" data-fragment-index="0" -->
+
+backwards compatible -> es "confiable" instalarla
 
 ---
 
@@ -90,6 +96,8 @@ New stuff 🎉 <!-- .element: class="fragment" data-fragment-index="0" -->
 ⬇️ <!-- .element: class="fragment" data-fragment-index="0" -->
 
 Seguridad 🔒 y bug fixes 🐛 <!-- .element: class="fragment" data-fragment-index="0" -->
+
+backwards compatible -> es "confiable" instalarla
 
 ---
 
@@ -101,19 +109,19 @@ Deja que commitizen genere la version por vos <!-- .element: class="fragment" da
 
 ---
 
-## Conventional commits
+## Conventional commits (opcional)
 
 Escribir los mensajes de los commits de manera **estandarizada**
 
 Facil de leer por humanos 🧑 y maquinas 🤖 <!-- .element: class="fragment" data-fragment-index="0" -->
 
-[documentacion](https://www.conventionalcommits.org/)
+[conventionalcommits.org](https://www.conventionalcommits.org/)
 
 ---
 
 ### Tips para commits
 
-- Si aplico este commit se introducira...
+- Si aplico este commit se introducirá... (If applied this commit will...)
 - Imperativo
 - Cortita y al pie
 
@@ -149,7 +157,7 @@ BREAKING CHANGE: `extends` key in config file is now used for extending other co
 
 ---
 
-## Objetivo de la demo
+## Objetivo del live coding
 
 Con cada nuevo cambio, generar un tag y el changelog y publicar los cambios
 
@@ -264,6 +272,8 @@ on:
 ---
 
 ![thanks](./assets/thanks.gif)
+
+email: santiwilly@gmail.com
 
 twitter: [@santiwilly](twitter.com/santiwilly)
 

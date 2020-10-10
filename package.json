@@ -1,4 +1,5 @@
 {
+  "version": "0.1.0",
   "scripts": {
     "start": "reveal-md slides.md -w --css style.css",
     "build": "reveal-md slides.md -w --css style.css --static build --assets-dir assets",
