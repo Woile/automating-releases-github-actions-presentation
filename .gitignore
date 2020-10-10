@@ -1,7 +1,7 @@
 build
 .venv
 .vscode
-
+*.bak
 # Logs
 logs
 *.log

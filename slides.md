@@ -47,6 +47,14 @@ recientes y generar la version correcta de semver automaticamente.
 
 ---
 
+Un solo comando
+
+```bash
+cz bump --changelog
+```
+
+---
+
 ## Release workflow
 
 🧑 Merge PR
@@ -109,7 +117,7 @@ Deja que commitizen genere la version por vos <!-- .element: class="fragment" da
 
 ---
 
-## Conventional commits (opcional)
+## Conventional commits
 
 Escribir los mensajes de los commits de manera **estandarizada**
 
@@ -249,6 +257,36 @@ version_files = [
 
 ---
 
+## Usando commitizen-action
+
+```yaml
+name: Bump version
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  bump_version:
+    if: "!startsWith(github.event.head_commit.message, 'bump:')"
+    runs-on: ubuntu-latest
+    name: "Bump version and create changelog with commitizen"
+    steps:
+      - name: Check out
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          token: "${{ secrets.PERSONAL_ACCESS_TOKEN }}"
+      - name: Create bump and changelog
+        uses: commitizen-tools/commitizen-action@master
+        with:
+          github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+```
+
+[commitizen-action](https://github.com/commitizen-tools/commitizen-action)
+
+---
 ## Generar _changelog_ 📂 automaticamente
 
 En el `yaml` con nuestra github action agregamos `--commitizen`
@@ -263,10 +301,32 @@ cz bump --yes --changelog
 Publish package + Documentation
 
 ```yaml
+name: Build and Deploy
 on:
   push:
     tags:
-      - "v*"
+      - "*"
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2.3.1
+        with:
+          persist-credentials: false
+
+      - name: Install and Build
+        run: |
+          npm install
+          npm run build
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@3.6.2
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: build
+          CLEAN: true
 ```
 
 ---
