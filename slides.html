@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
     <title>Automatizando releases con commitizen y github actions</title>
+    <link rel="shortcut icon" href="./favicon.ico"/>
     <link rel="stylesheet" href="./dist/reveal.css" />
     <link rel="stylesheet" href="./dist/theme/black.css" id="theme" />
     <link rel="stylesheet" href="./css/highlight/zenburn.css" />
@@ -24,7 +25,7 @@ Automatizando releases con commitizen y github actions
 
 [![github logo](./assets/github.png)](https://github.com/commitizen-tools/commitizen)
 
-v0.1.0
+v0.3.0
 </script></section><section  data-markdown><script type="text/template">
 ## About me
 
@@ -156,7 +157,7 @@ En un archivo `.cz.toml` o `pyproject.toml`
 
 ```toml
 [tool.commitizen]
-version = "0.1.0"  # should be your current semver version
+version = "0.3.0"  # should be your current semver version
 ```
 
 `cz init` <!-- .element: class="fragment" data-fragment-index="0" -->
@@ -221,7 +222,7 @@ jobs:
 
 ```toml
 [tool.commitizen]
-version = "0.1.0"  # This should be your current semver version
+version = "0.3.0"  # This should be your current semver version
 version_files = [
     "src/__version__.py:version",
     "README.md"
