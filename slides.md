@@ -40,7 +40,7 @@ actual: Amsterdam 🇳🇱 <!-- .element: class="fragment" data-fragment-index="
 
 ---
 
-## Introduccion
+## Introducción
 
 `commitizen` es una herramienta escrita en python para recolectar los cambios
 recientes y generar la version correcta de semver automaticamente.
@@ -167,7 +167,7 @@ BREAKING CHANGE: `extends` key in config file is now used for extending other co
 
 ## Objetivo del live coding
 
-Con cada nuevo cambio, generar un tag y el changelog y publicar los cambios
+Con cada nuevo cambio, generar tag y changelog; y publicar los cambios
 
 ---
 
@@ -181,6 +181,30 @@ version = "0.1.0"  # should be your current semver version
 ```
 
 `cz init` <!-- .element: class="fragment" data-fragment-index="0" -->
+
+---
+
+## Actualizar archivos con la nueva version
+
+```toml
+[tool.commitizen]
+version = "0.1.0"  # This should be your current semver version
+version_files = [
+    "src/__version__.py:version",
+    "README.md"
+]
+```
+
+---
+
+## Generar _changelog_ 📂 automaticamente
+
+En el `yaml` con nuestra github action agregamos `--commitizen`
+Quedando:
+
+```bash
+cz bump --yes --changelog
+```
 
 ---
 
@@ -218,16 +242,16 @@ jobs:
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git pull origin master --tags
     - name: Create bump
       run: |
-        cz bump --yes
+        cz bump --yes --changelog
         git tag
     - name: Push changes
       uses: Woile/github-push-action@master
       with:
         github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         tags: "true"
+        branch: main
 ```
 
 ---
@@ -244,19 +268,6 @@ jobs:
 
 ---
 
-## Actualizar archivos con la nueva version
-
-```toml
-[tool.commitizen]
-version = "0.1.0"  # This should be your current semver version
-version_files = [
-    "src/__version__.py:version",
-    "README.md"
-]
-```
-
----
-
 ## Usando commitizen-action
 
 ```yaml
@@ -265,7 +276,7 @@ name: Bump version
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   bump_version:
@@ -282,19 +293,10 @@ jobs:
         uses: commitizen-tools/commitizen-action@master
         with:
           github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          branch: main
 ```
 
 [commitizen-action](https://github.com/commitizen-tools/commitizen-action)
-
----
-## Generar _changelog_ 📂 automaticamente
-
-En el `yaml` con nuestra github action agregamos `--commitizen`
-Quedando:
-
-```bash
-cz bump --yes --changelog
-```
 
 ---
 
@@ -338,3 +340,5 @@ email: santiwilly@gmail.com
 twitter: [@santiwilly](twitter.com/santiwilly)
 
 github: [woile](github.com/Woile)
+
+[github.com/commitizen-tools/commitizen](https://github.com/commitizen-tools/commitizen)
