@@ -11,7 +11,7 @@ Automatizando releases con commitizen y github actions
 
 [![github logo](./assets/github.png)](https://github.com/commitizen-tools/commitizen)
 
-v0.3.1
+v0.3.2
 
 ---
 
