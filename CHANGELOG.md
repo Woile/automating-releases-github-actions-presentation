@@ -1,3 +1,9 @@
+## 0.3.1 (2020-10-15)
+
+### Fix
+
+- match files version with cz.toml file
+
 ## 0.3.0 (2020-10-15)
 
 ### Feat
