@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
     <title>Automatizando releases con commitizen y github actions</title>
-    <link rel="shortcut icon" href="./favicon.ico"/>
     <link rel="stylesheet" href="./dist/reveal.css" />
     <link rel="stylesheet" href="./dist/theme/black.css" id="theme" />
     <link rel="stylesheet" href="./css/highlight/zenburn.css" />
@@ -25,7 +24,7 @@ Automatizando releases con commitizen y github actions
 
 [![github logo](./assets/github.png)](https://github.com/commitizen-tools/commitizen)
 
-v0.3.0
+v0.1.0
 </script></section><section  data-markdown><script type="text/template">
 ## About me
 
@@ -48,7 +47,7 @@ actual: Amsterdam 🇳🇱 <!-- .element: class="fragment" data-fragment-index="
 7. actualizar archivos con la nueva version
 8. generar _changelog_ 📂 automaticamente
 </script></section><section  data-markdown><script type="text/template">
-## Introduccion
+## Introducción
 
 `commitizen` es una herramienta escrita en python para recolectar los cambios
 recientes y generar la version correcta de semver automaticamente.
@@ -149,7 +148,7 @@ BREAKING CHANGE: `extends` key in config file is now used for extending other co
 </script></section><section  data-markdown><script type="text/template">
 ## Objetivo del live coding
 
-Con cada nuevo cambio, generar un tag y el changelog y publicar los cambios
+Con cada nuevo cambio, generar tag y changelog; y publicar los cambios
 </script></section><section  data-markdown><script type="text/template">
 ## Configuracion de commitizen
 
@@ -157,10 +156,30 @@ En un archivo `.cz.toml` o `pyproject.toml`
 
 ```toml
 [tool.commitizen]
-version = "0.3.0"  # should be your current semver version
+version = "0.1.0"  # should be your current semver version
 ```
 
 `cz init` <!-- .element: class="fragment" data-fragment-index="0" -->
+</script></section><section  data-markdown><script type="text/template">
+## Actualizar archivos con la nueva version
+
+```toml
+[tool.commitizen]
+version = "0.1.0"  # This should be your current semver version
+version_files = [
+    "src/__version__.py:version",
+    "README.md"
+]
+```
+</script></section><section  data-markdown><script type="text/template">
+## Generar _changelog_ 📂 automaticamente
+
+En el `yaml` con nuestra github action agregamos `--commitizen`
+Quedando:
+
+```bash
+cz bump --yes --changelog
+```
 </script></section><section  data-markdown><script type="text/template">
 ## Incrementar la version automaticamente
 
@@ -196,16 +215,16 @@ jobs:
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git pull origin master --tags
     - name: Create bump
       run: |
-        cz bump --yes
+        cz bump --yes --changelog
         git tag
     - name: Push changes
       uses: Woile/github-push-action@master
       with:
         github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         tags: "true"
+        branch: main
 ```
 </script></section><section  data-markdown><script type="text/template">
 ## Ejemplos de GH actions
@@ -218,17 +237,6 @@ jobs:
 └── publish-package.yaml
 ```
 </script></section><section  data-markdown><script type="text/template">
-## Actualizar archivos con la nueva version
-
-```toml
-[tool.commitizen]
-version = "0.3.0"  # This should be your current semver version
-version_files = [
-    "src/__version__.py:version",
-    "README.md"
-]
-```
-</script></section><section  data-markdown><script type="text/template">
 ## Usando commitizen-action
 
 ```yaml
@@ -237,7 +245,7 @@ name: Bump version
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   bump_version:
@@ -254,17 +262,10 @@ jobs:
         uses: commitizen-tools/commitizen-action@master
         with:
           github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          branch: main
 ```
 
 [commitizen-action](https://github.com/commitizen-tools/commitizen-action)
-</script></section><section  data-markdown><script type="text/template">## Generar _changelog_ 📂 automaticamente
-
-En el `yaml` con nuestra github action agregamos `--commitizen`
-Quedando:
-
-```bash
-cz bump --yes --changelog
-```
 </script></section><section  data-markdown><script type="text/template">
 Publish package + Documentation
 
